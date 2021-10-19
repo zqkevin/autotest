@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3>Play video</h3>
+<form method="post">
+    <a>{{movie_name}}</a>
+    <video controls="controls" src="{{url_for('static',filename='vido/')}}{{movie_name}}" height="400px" width="600px"> </video>
+</form>
+{% endblock %}
+

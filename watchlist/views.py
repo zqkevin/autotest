@@ -28,6 +28,10 @@ def index():
     movies = Movie.query.all()
     return render_template('index.html', movies=movies)
 
+@app.route('/playvideo/<movie_name>', methods = ['GET','POST'])
+@login_required
+def play(movie_name):
+    return render_template('playvideo.html',movie_name=movie_name)
 
 @app.route('/movie/edit/<int:movie_id>', methods=['GET', 'POST'])
 @login_required
@@ -37,13 +41,14 @@ def edit(movie_id):
     if request.method == 'POST':
         title = request.form['title']
         year = request.form['year']
-
+        filename = request.form['filename']
         if not title or not year or len(year) != 4 or len(title) > 60:
             flash('Invalid input.')
             return redirect(url_for('edit', movie_id=movie_id))
 
         movie.title = title
         movie.year = year
+        movie.filename = filename
         db.session.commit()
         flash('Item updated.')
         return redirect(url_for('index'))
@@ -90,8 +95,7 @@ def login():
             flash('Invalid input.')
             return redirect(url_for('login'))
 
-        user = User.query.first()
-
+        user = User.query.filter_by(username=username).first()
         if username == user.username and user.validate_password(password):
             login_user(user)
             flash('Login success.')

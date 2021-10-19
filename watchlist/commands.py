@@ -17,27 +17,22 @@ def initdb(drop):
 
 @app.cli.command()
 def forge():
+    db.drop_all()
     """Generate fake data."""
     db.create_all()
 
     name = 'Grey Li'
     movies = [
-        {'title': 'My Neighbor Totoro', 'year': '1988'},
-        {'title': 'Dead Poets Society', 'year': '1989'},
-        {'title': 'A Perfect World', 'year': '1993'},
-        {'title': 'Leon', 'year': '1994'},
-        {'title': 'Mahjong', 'year': '1996'},
-        {'title': 'Swallowtail Butterfly', 'year': '1996'},
-        {'title': 'King of Comedy', 'year': '1999'},
-        {'title': 'Devils on the Doorstep', 'year': '1999'},
-        {'title': 'WALL-E', 'year': '2008'},
-        {'title': 'The Pork of Music', 'year': '2012'},
+        {'title': 'My Neighbor Totoro', 'year': '1988', 'filename': 'video.mp4'},
+        {'title': 'Dead Poets Society', 'year': '1989','filename': 'video.mp4'},
+        {'title': 'A Perfect World', 'year': '1993','filename': 'video.mp4'},
+
     ]
 
     user = User(name=name)
     db.session.add(user)
     for m in movies:
-        movie = Movie(title=m['title'], year=m['year'])
+        movie = Movie(title=m['title'], year=m['year'], filename=m['filename'])
         db.session.add(movie)
 
     db.session.commit()
