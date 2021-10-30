@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+import time
+
 from flask import render_template, request, url_for, redirect, flash
 from flask_login import login_user, login_required, logout_user, current_user
-
+from watchlist.scrip import binance,command
 from watchlist import app, db
-from watchlist.models import User, Movie
-
+from watchlist.models import User, Movie, Ethusdt1m
+import numpy as np
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -26,7 +28,18 @@ def index():
         return redirect(url_for('index'))
 
     movies = Movie.query.all()
+
     return render_template('index.html', movies=movies)
+@app.route('/binan',methods=['GET','POST'])
+def binan():
+    if request.method == 'POST':
+        info = request.values.to_dict()
+        r, s = binance.getstick(limit=10, starttime=info['opentime'], symbol=info['symbol'])
+        return render_template('binan.html', mticks=r, symbol=s)
+
+    r, s = binance.getstick(limit=10)
+    r.reverse()
+    return render_template('binan.html', mticks=r, symbol=s)
 
 @app.route('/playvideo/<movie_name>', methods = ['GET','POST'])
 @login_required
@@ -84,6 +97,11 @@ def settings():
 
     return render_template('settings.html')
 
+@app.route('/testt',methods=['GET',"POST"])
+def test():
+    info = 1
+
+    return render_template('testt.html',info=info)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

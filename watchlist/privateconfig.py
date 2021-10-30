@@ -1,0 +1,3 @@
+p_api_key = 'oK8MPcduJ05ej3drFXWmXI7M4N9UZAmwkHqrDXwTL01oeHFN0WXfjWwcbS2mlsqF'
+p_secret_key = 'yilX8DnKHOVgqVEurOpn8lHE7YuWXgkK0a5l1wl8qCbcj6sw6uKTJe0zcBFNM0ME'
+temp = 10

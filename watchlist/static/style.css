@@ -4,7 +4,41 @@ body {
     font-size: 14px;
     font-family: Helvetica, Arial, sans-serif;
 }
+.biaoti{
+	font-family: 微软雅黑;
+	font-size: 26px;
+	font-weight: bold;
+	border-bottom:1px dashed #CCCCCC;
+	color:#004085;
+    background-color: #b8daff;
 
+}
+.titfont {
+
+	font-family: 微软雅黑;
+	font-size: 16px;
+	font-weight: bold;
+	color: #255e95;
+	background-color:#e9faff;
+}
+.tabtxt {
+	font-family: 微软雅黑;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: left;
+	padding-right: 10px;
+	color:#327cd1;
+    background-color: #dfead0
+}
+.tabtxt1 {
+	font-family: 微软雅黑;
+	font-size: 14px;
+	font-weight: bold;
+	text-align: left;
+	padding-right: 10px;
+	color:#327cd1;
+    background-color: #f6e4e4
+}
 .avatar {
     width: 40px;
 }

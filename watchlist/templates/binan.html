@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>{{ mticks|length }} Titles</p>
+
+
+
+<form name="binanvalue" style="margin-bottom: 10px" method="POST">
+    <fieldset>
+        <legend>市场信息</legend>
+        <select name="symbol">
+            <option value="ETHUSDT" selected>ETHUSDT</option>
+            <option value="BTCUSDT" >BTCUSDT</option>
+            <option value="BNBUSDT">BNBUSDT</option>
+        </select>
+        <input type="datetime-local" name="opentime" required>
+
+        <button type="submit" formaction="{{url_for('binan')}}" style="margin-left:100px">查询</button>
+    </fieldset>
+</form>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr align="center" >
+        <td class="biaoti">{{symbol}}</td>
+    </tr>
+</table>
+<table width="100%" align="center">
+    <tr class="titfont">
+        <th>开始时间</th>
+        <th>开盘价格</th>
+        <th>振幅</th>
+        <th>成交量</th>
+    </tr>
+    {% for mtick in mticks %}
+    {% if mtick.zhenfu < 0 %}
+    <tr class="tabtxt1">
+    {% else %}
+    <tr class="tabtxt">
+    {% endif %}
+        <td>{{ mtick.openTime }}</td>
+        <td>{{ mtick.open }}</td>
+        <td>{{mtick.zhenfu}}%</td>
+        <td>{{mtick.numTrades}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<img alt="Walking Totoro" class="totoro" src="{{ url_for('static', filename='images/totoro.gif') }}" title="to~to~ro~">
+{% endblock %}
